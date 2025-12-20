@@ -1,0 +1,44 @@
+[tool.pylint.MAIN]
+load-plugins = ["pylint_django"]
+ignore = [
+    "migrations",
+    "tests",
+    "test",
+    "venv",
+    ".venv",
+    "setup.py",
+    "manage.py",
+]
+django-settings-module = "license_service.settings.ci"
+
+[tool.black]
+exclude = '''
+/(
+    \.git
+  | \.hg
+  | \.mypy_cache
+  | \.tox
+  | \.venv
+  | venv
+  | \.local
+  | \.pytest_cache
+  | _build
+  | buck-out
+  | build
+  | dist
+  | migrations
+)/
+'''
+
+[tool.isort]
+py_version = 311
+multi_line_output = 3
+include_trailing_comma = true
+skip_glob = ["venv/*", "**/migrations/**"]
+profile = "black"
+
+[tool.pytest.ini_options]
+minversion = "6.0"
+DJANGO_SETTINGS_MODULE = "license_service.settings.ci"
+addopts = "-x --strict-markers --ds=license_service.settings.ci"
+python_files = ["test*.py", "test_*.py"]

@@ -1,0 +1,3 @@
+-r ci.txt
+
+ipython==8.30.0
