@@ -30,24 +30,23 @@ def generate_tree(directory, prefix="", max_depth=None, current_depth=0):
     ]
 
     entries = [
-        e
-        for e in entries
-        if not any(pattern in e for pattern in ignore_patterns)
+        e for e in entries if not any(pattern in e for pattern in ignore_patterns)
     ]
 
     for i, entry in enumerate(entries):
         path = os.path.join(directory, entry)
         is_last = i == len(entries) - 1
 
-        # Draw the tree structure
         connector = "└── " if is_last else "├── "
         print(f"{prefix}{connector}{entry}")
 
-        # Recurse into directories
         if os.path.isdir(path):
             extension = "    " if is_last else "│   "
             generate_tree(
-                path, prefix + extension, max_depth, current_depth + 1
+                path,
+                prefix + extension,
+                max_depth,
+                current_depth + 1,
             )
 
 
